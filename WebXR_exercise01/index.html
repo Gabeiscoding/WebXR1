@@ -4,13 +4,14 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + TS</title>
+    <title>BrowserXR_Trial</title>
     <script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.6.0/dist/aframe-extras.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aframe-physics-system@4.0.1/dist/aframe-physics-system.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/super-hands@4.0.5/dist/super-hands.min.js"></script>
+    <!---- <script src="https://cdn.jsdelivr.net/npm/super-hands@4.0.5/dist/super-hands.min.js"></script> <-->
 
     <script src="src/color-cycle.js"></script> <!--colour-cycle.js-->
+    <script src="https://unpkg.com/aframe-event-set-component@5.x.x/dist/aframe-event-set-component.min.js"></script> <!-- event set component-->
 <!-- ...existing code... -->
   </head>
   <body>
@@ -18,11 +19,16 @@
     <p> Hello Everyone! </p>
 
      <a-scene>
-      <a-assets>
+      
+      <a-assets>
       <a-asset-item id="cat" src="public/cat.glb"></a-asset-item>
       </a-assets>
 
-      <a-box position="-1 0.5 -3" 
+       <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"
+           event-set__enter="_event: mouseenter; color: #FF23FA"
+           event-set__leave="_event: mouseleave; color: #4CC559"></a-box>
+
+      <a-box position="1 0.5 -2" 
       rotation="0 45 0" 
       color="#4CC3D9"
       dynamic-body grabbable stretchable draggable 
@@ -52,14 +58,16 @@
       static-body>
       </a-plane>
 
+      <a-camera>
+      <a-cursor></a-cursor>
+      </a-camera>
+
 
       <a-sky color="#ECECEC"></a-sky>
       <a-entity light="type: ambient; color: #CCC"></a-entity>
       <a-entity light="type: directional; color: green; intensity: 1.0" position="-1 1 0"></a-entity>
 
-      <a-entity camera look-controls wasd-controls position="0 1.6 0">
-      <a-entity laser-controls="hand: right" super-hands></a-entity>
-      </a-entity>
+      
       
       <a-entity
       gltf-model="#cat"
